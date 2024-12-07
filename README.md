@@ -1,42 +1,75 @@
-This repository contains the Konko AI Chat API, a FastAPI-based application designed to manage chat sessions and integrate with an LLM (Language Model API) for generating AI-assisted responses. The project addresses concurrency issues, handles invalid inputs gracefully, and provides a clean abstraction for in-memory state management.
+## Konko AI Chat API
 
-Features
-Core Functionality:
+This repository holds the Konko AI Chat API, a FastAPI application designed to manage chat sessions and integrate with an LLM (Large Language Model) to generate AI-assisted responses. The project prioritizes concurrency issues, gracefully handles unexpected inputs, and provides a well-defined approach for managing in-memory state.
 
-Retrieve Chat Sessions: Fetch all chat sessions and their attributes.
-Start a New Chat: Create a separate chat session.
-Add Messages: Add user messages and receive AI-generated responses.
-Fetch Messages: Retrieve all messages within a chat session.
-Chat Summaries: Retrieve a summary of a chat, including counts and highlights.
-Technical Highlights:
+**Features**
 
-Asynchronous programming for efficient handling of concurrent requests.
-Thread-safe in-memory storage using asyncio.Lock.
-Mocking support for seamless testing of OpenAI API calls.
-Comprehensive error handling for invalid inputs and edge cases.
-Compliance with Requirements:
+* **Core Functionality:**
+    * Retrieve existing chat sessions and their details.
+    * Start new chat sessions.
+    * Add user messages and receive AI-generated responses.
+    * Fetch all messages within a chat session.
+    * Get chat summaries with message counts and highlights.
+* **Technical Highlights:**
+    * Asynchronous programming for efficient concurrent request handling.
+    * Thread-safe in-memory storage via `asyncio.Lock`.
+    * Mocking support for streamlined testing of OpenAI API interactions.
+    * Detailed error handling for invalid inputs and edge cases.
+* **Compliance with Requirements:**
+    * Manages concurrency edge cases effectively.
+    * Handles multiple simultaneous conversations without interference.
+    * Handles follow-up messages with context-aware AI responses.
 
-Properly handles concurrency edge cases.
-Services multiple simultaneous conversations without interference.
-Addresses follow-up messages with an AI-powered context-aware response.
-Installation
-Prerequisites
-Python 3.10 or higher
-pip (Python package manager)
-Steps
-Clone the repository:
+**Installation**
 
-bash
-Copy code
+**Prerequisites**
+
+* Python 3.10 or later
+* `pip` (Python package manager)
+
+**Steps**
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-repo/konko-ai-chat-api.git
+cd konko-ai-chat-api
+```
+
+2. Create and activate a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Set the OpenAI API key environment variable:
+
+```bash
+export OPENAI_API_KEY="your_openai_api_key"
+```
+
+5. Run the application:
+
+```bash
 uvicorn app.main:app --reload
-Access the API documentation at:
+```
 
-arduino
-Copy code
+6. Access the API documentation at:
+
+```
 http://127.0.0.1:8000/docs
-Project Structure
-bash
-Copy code
+```
+
+**Project Structure**
+
+```
 konko-ai/
 ├── app/
 │   ├── __init__.py
@@ -50,37 +83,60 @@ konko-ai/
 │   └── ...
 ├── requirements.txt       # Project dependencies
 └── README.md              # Project documentation
-Testing
-Run Tests
+```
+
+**Testing**
+
+**Run Tests**
+
 Install testing dependencies:
 
+```bash
+pip install pytest pytest-mock
+```
 
-Creation of chat sessions.
-Retrieval of all chats and messages.
-Adding messages and verifying AI responses.
-Handling invalid chat IDs.
-Concurrent message handling to ensure thread safety.
-Mocking OpenAI API calls for isolated testing.
-Addressed Concerns
-Concurrency Handling
-Issue: Risk of data corruption when multiple requests access shared memory.
-Solution: Used asyncio.Lock to synchronize access to in-memory data structures, ensuring thread safety.
-Invalid Chat IDs
-Issue: Requests with invalid or non-existent chat IDs resulted in unhandled exceptions.
-Solution: Graceful handling of invalid IDs with HTTPException and returning 404 Not Found.
-Empty Messages
-Issue: API allowed empty user messages, leading to meaningless AI responses.
-Solution: Added validation to reject empty messages with 422 Unprocessable Entity.
-Mocking LLM API
-Issue: Tests relied on live OpenAI API calls, making them dependent on external services.
-Solution: Integrated pytest-mock to mock OpenAI responses, ensuring test reliability and faster execution.
-Production Readiness
-Clean abstractions in the code allow for easy replacement of in-memory storage with a database.
-Structured logging can be integrated for better observability in production environments.
-Future Enhancements
-Database Integration: Replace in-memory storage with a persistent database like PostgreSQL or MongoDB.
+Execute the test suite:
 
+```bash
+pytest -v
+```
 
-Enhanced Summaries: Improve chat summaries with sentiment analysis or topic extraction.
+**Test Coverage**
 
-Scalability: Optimize for distributed deployment using message queues (e.g., RabbitMQ) and caching layers (e.g., Redis).
+The test suite includes test cases for:
+
+* Creation of chat sessions
+* Retrieval of all chats and messages
+* Adding messages and verifying AI responses
+* Handling invalid chat IDs
+* Concurrent message handling (thread safety)
+* Mocking OpenAI API calls for isolated testing
+
+**Addressed Concerns**
+
+* **Concurrency Handling:**
+    * **Issue:** Shared memory access by multiple requests could lead to data corruption.
+    * **Solution:** `asyncio.Lock` is used to synchronize access to in-memory data structures, ensuring thread safety.
+* **Invalid Chat IDs:**
+    * **Issue:** Requests with invalid or non-existent chat IDs caused unhandled exceptions.
+    * **Solution:** Graceful handling of invalid IDs with `HTTPException` and a 404 Not Found response.
+* **Empty Messages:**
+    * **Issue:** API allowed empty user messages, leading to meaningless AI responses.
+    * **Solution:** Validation added to reject empty messages with a 422 Unprocessable Entity response.
+* **Mocking LLM API:**
+    * **Issue:** Tests relied on live OpenAI API calls, making them dependent on external services.
+    * **Solution:** `pytest-mock` integrated to mock OpenAI responses, ensuring test reliability and faster execution.
+
+**Production Readiness**
+
+* Clean abstractions in the code enable easy replacement of in-memory storage with a database.
+* Structured logging can be integrated for better observability in production environments.
+
+**Future Enhancements**
+
+* **Database Integration:**
+    * Replace in-memory storage with a persistent database like PostgreSQL or MongoDB.
+* **Rate Limiting:**
+    * Implement throttling to prevent abuse of API endpoints.
+* **Enhanced Summaries:**
+    * Improve
