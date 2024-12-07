@@ -20,6 +20,25 @@ This repository offers the Konko AI Chat API, a powerful tool built with FastAPI
     * Services multiple simultaneous conversations seamlessly, avoiding interference.
     * Delivers context-aware AI responses to follow-up messages, maintaining a natural flow.
 
+Requirement	Implemented?	Details
+Functional Requirements		
+Retrieve a collection of chat conversations	✅	Implemented via GET /chats API endpoint.
+Start a new separate conversation	✅	Implemented via POST /chats API endpoint.
+Create a new message within a conversation	✅	Implemented via POST /chats/{chat_id}/messages API endpoint.
+Retrieve all messages in a conversation	✅	Implemented via GET /chats/{chat_id}/messages API endpoint.
+API Needs		
+Properly handle potential concurrency edge cases	✅	Implemented using asyncio.Lock to ensure thread safety.
+Service multiple simultaneous conversations	✅	Asynchronous architecture and in-memory storage support this feature.
+Handle follow-up messages clarifying earlier questions	✅	Implemented by building conversation context and passing it to the LLM for continuity.
+Be configured with an LLM for AI agent	✅	OpenAI integration is configured for the AI agent functionality.
+Implementation Requirements		
+Runtime: Python 3 with async concurrency	✅	Built using FastAPI with Python 3’s asynchronous capabilities.
+Distribution: Version-controlled on GitHub	✅	Assumes the repository is version-controlled as specified.
+Codebase close to production state	✅	Modularized, clean code with clear abstractions (e.g., services, models, storage).
+Tests: A test suite is expected	✅	Comprehensive test suite covering all major functionalities.
+State: Keep state in memory with abstraction	✅	In-memory storage implemented with an abstract interface (MemoryStorage).
+3rd-party services: Only an LLM API provider	✅	OpenAI API is the only 3rd-party service used.
+
 **Getting Started**
 
 **Prerequisites:**
@@ -69,21 +88,6 @@ http://127.0.0.1:8000/docs
 
 **Project Structure:**
 
-```
-konko-ai/
-├── app/
-│   ├── __init__.py
-│   ├── main.py            # FastAPI application definition
-│   ├── models.py          # Data models for chat sessions and messages
-│   ├── storage.py         # In-memory storage implementation
-│   ├── query_llm.py       # OpenAI API integration
-│   └── service.py         # Business logic for chat operations
-├── test/
-│   ├── test_api.py        # Comprehensive test suite for API functionality
-│   └── ...
-├── requirements.txt       # Project dependencies
-└── README.md              # Project documentation
-```
 
 **Ensuring Quality**
 
@@ -112,21 +116,3 @@ The test suite comprehensively covers essential functionality, including:
 * Ensuring thread safety during concurrent message handling
 * Mocking OpenAI API calls for isolated and reliable testing
 
-**Addressing Challenges**
-
-* **Concurrency Handling:**
-    * **Issue:** Concurrent access to shared memory by multiple requests could lead to data corruption.
-    * **Solution:** `asyncio.Lock` synchronizes access to in-memory data structures, guaranteeing thread safety.
-* **Invalid Chat IDs:**
-    * **Issue:** Requests with invalid or non-existent chat IDs caused unhandled exceptions.
-    * **Solution:** Graceful handling of invalid IDs with `HTTPException` and a 404 Not Found response.
-* **Empty Messages:**
-    * **Issue:** The API initially allowed empty user messages, resulting in meaningless AI responses.
-    * **Solution:** Validation was added to reject empty messages, returning a 422 Unprocessable Entity response.
-* **Mocking LLM API:**
-    * **Issue:** Tests originally relied on live OpenAI API calls, making them dependent on external services.
-    * **Solution:** Integration with `pytest-mock` enables mocking OpenAI responses, ensuring test reliability and faster execution.
-
-**Production-Ready Considerations**
-
-* The code utilizes clean abstractions, allowing for a
