@@ -32,7 +32,7 @@ This repository offers the Konko AI Chat API, a powerful tool built with FastAPI
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-repo/konko-ai-chat-api.git
+git clone https://github.com/BipinShetty/konko-ai-chat-api.git
 cd konko-ai-chat-api
 ```
 
