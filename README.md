@@ -20,24 +20,30 @@ This repository offers the Konko AI Chat API, a powerful tool built with FastAPI
     * Services multiple simultaneous conversations seamlessly, avoiding interference.
     * Delivers context-aware AI responses to follow-up messages, maintaining a natural flow.
 
-Requirement	Implemented?	Details
-Functional Requirements		
-Retrieve a collection of chat conversations	✅	Implemented via GET /chats API endpoint.
-Start a new separate conversation	✅	Implemented via POST /chats API endpoint.
-Create a new message within a conversation	✅	Implemented via POST /chats/{chat_id}/messages API endpoint.
-Retrieve all messages in a conversation	✅	Implemented via GET /chats/{chat_id}/messages API endpoint.
-API Needs		
-Properly handle potential concurrency edge cases	✅	Implemented using asyncio.Lock to ensure thread safety.
-Service multiple simultaneous conversations	✅	Asynchronous architecture and in-memory storage support this feature.
-Handle follow-up messages clarifying earlier questions	✅	Implemented by building conversation context and passing it to the LLM for continuity.
-Be configured with an LLM for AI agent	✅	OpenAI integration is configured for the AI agent functionality.
-Implementation Requirements		
-Runtime: Python 3 with async concurrency	✅	Built using FastAPI with Python 3’s asynchronous capabilities.
-Distribution: Version-controlled on GitHub	✅	Assumes the repository is version-controlled as specified.
-Codebase close to production state	✅	Modularized, clean code with clear abstractions (e.g., services, models, storage).
-Tests: A test suite is expected	✅	Comprehensive test suite covering all major functionalities.
-State: Keep state in memory with abstraction	✅	In-memory storage implemented with an abstract interface (MemoryStorage).
-3rd-party services: Only an LLM API provider	✅	OpenAI API is the only 3rd-party service used.
+**Here's a formatted version of the provided requirement table:**
+
+| Requirement | Implemented? | Details |
+|---|---|---|
+| **Functional Requirements** | | |
+| Retrieve a collection of chat conversations | ✅ | Implemented via GET /chats API endpoint. |
+| Start a new separate conversation | ✅ | Implemented via POST /chats API endpoint. |
+| Create a new message within a conversation | ✅ | Implemented via POST /chats/{chat_id}/messages API endpoint. |
+| Retrieve all messages in a conversation | ✅ | Implemented via GET /chats/{chat_id}/messages API endpoint. |
+| **API Needs** | | |
+| Properly handle potential concurrency edge cases | ✅ | Implemented using asyncio.Lock to ensure thread safety. |
+| Service multiple simultaneous conversations | ✅ | Asynchronous architecture and in-memory storage support this feature. |
+| Handle follow-up messages clarifying earlier questions | ✅ | Implemented by building conversation context and passing it to the LLM for continuity. |
+| Be configured with an LLM for AI agent | ✅ | OpenAI integration is configured for the AI agent functionality. |
+| **Implementation Requirements** | | |
+| Runtime: Python 3 with async concurrency | ✅ | Built using FastAPI with Python 3’s asynchronous capabilities. |
+| Distribution: Version-controlled on GitHub | ✅ | Assumes the repository is version-controlled as specified. |
+| Codebase close to production state | ✅ | Modularized, clean code with clear abstractions (e.g., services, models, storage). |
+| Tests: A test suite is expected | ✅ | Comprehensive test suite covering all major functionalities. |
+| State: Keep state in memory with abstraction | ✅ | In-memory storage implemented with an abstract interface (MemoryStorage). |
+| 3rd-party services: Only an LLM API provider | ✅ | OpenAI API is the only 3rd-party service used. |
+
+**Would you like me to format it in a different way, or perhaps create a report-style document?** 
+
 
 **Getting Started**
 
