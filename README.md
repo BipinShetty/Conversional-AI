@@ -20,7 +20,7 @@ This repository offers the Konko AI Chat API, a powerful tool built with FastAPI
     * Services multiple simultaneous conversations seamlessly, avoiding interference.
     * Delivers context-aware AI responses to follow-up messages, maintaining a natural flow.
 
-**Here's a formatted version of the provided requirement table:**
+**Requirements met as per assignment:**
 
 | Requirement | Implemented? | Details |
 |---|---|---|
