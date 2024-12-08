@@ -68,5 +68,5 @@ class MemoryStorage:
                 "total_messages": len(messages),
                 "user_message_count": len(user_msgs),
                 "assistant_message_count": len(assistant_msgs),
-                "summary": " | ".join(user_msgs[:3]),
+                "summary": " | ".join(user_msgs),
             }
