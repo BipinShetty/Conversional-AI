@@ -1,4 +1,4 @@
-## Konko AI Chat API: A FastAPI Powerhouse for Conversational AI
+## A FastAPI Powerhouse for Conversational AI
 
 This repository offers the Konko AI Chat API, a powerful tool built with FastAPI. It excels at managing chat sessions and integrates seamlessly with an LLM (Large Language Model API) to deliver AI-powered responses. The project prioritizes robust handling of concurrent requests, gracefully manages unexpected inputs, and provides a well-defined approach for in-memory state management.
 
